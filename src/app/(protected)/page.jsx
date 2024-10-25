@@ -12,40 +12,40 @@ export default async function Home() {
   return (
     
     
-      <main className="container mx-auto max-w-[800px]">
-        <div id="orders-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Customer</th>
-                <th>Status</th>
+    <main className="container mx-auto max-w-[800px]">
+      <div id="orders-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Status</th>
+              
+              <th>Total</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map(order =>(
+              <tr key={order.$id}>
+                <td>
+                  <strong>{order.customer}</strong>
+                  <p>{order.customer_email}</p>  
+                </td>
                 
-                <th>Total</th>
+                
+                <td>{order.status}</td>
+                <td>{order.amount}</td>
+                
+                
 
               </tr>
-            </thead>
-            <tbody>
-              {orders.map(order =>(
-                <tr key={order.$id}>
-                  <td>
-                    <strong>{order.customer}</strong>
-                    <p>{order.customer_email}</p>  
-                  </td>
-                  
-                  
-                  <td>{order.status}</td>
-                  <td>{order.amount}</td>
-                  
-                  
 
-                </tr>
-
-              ))}
-              
-            </tbody>
-          </table>
-        </div>
-      </main>
-    
-  );
+            ))}
+            
+          </tbody>
+        </table>
+      </div>
+    </main>
+  
+);
 }
