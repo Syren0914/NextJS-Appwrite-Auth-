@@ -22,7 +22,7 @@ export default async function Page() {
                         type="text" 
                         name="name" 
                         placeholder="Enter your name..." 
-                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
                     />
                 </div>
 
@@ -32,7 +32,7 @@ export default async function Page() {
                         type="email" 
                         name="email" 
                         placeholder="Enter your email..." 
-                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
                     />
                 </div>
                 <div className="mb-5">
@@ -41,7 +41,7 @@ export default async function Page() {
                         type="phone" 
                         name="email" 
                         placeholder="Enter your email..." 
-                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
                     />
                 </div>
 
@@ -51,7 +51,7 @@ export default async function Page() {
                         type="password" 
                         name="password" 
                         placeholder="Enter your password..." 
-                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
                     />
                 </div>
 
@@ -59,7 +59,7 @@ export default async function Page() {
                     <input 
                         type="submit" 
                         value="Sign Up" 
-                        className="w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-200 cursor-pointer"
+                        className="w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-white hover:text-black transition duration-200 cursor-pointer"
                     />
                 </div>
 
