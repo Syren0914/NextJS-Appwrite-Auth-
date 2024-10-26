@@ -4,18 +4,20 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import auth from "../../auth";
 
-export default async function Page() {
+export default async function Page({params}) {
     const user = await auth.getUser();
 
     if (user) {
         redirect('/');
     }
+    
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <form id="login-form" action={auth.createSession} className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h3 className="text-2xl font-semibold text-center text-gray-800 mb-4">Login</h3>
                 <p className="text-sm text-center text-gray-600 mb-8">Enter Your Information to Login</p>
+                
                 <div className="mb-5">
                     <label className="block text-sm font-medium text-gray-700">Email:</label>
                     <input 

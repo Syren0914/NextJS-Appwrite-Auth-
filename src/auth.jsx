@@ -25,13 +25,19 @@ const auth = {
         "use server"
         const data = Object.fromEntries(formData)
         const {email, password} = data
+        let session; 
+        try{
+            const {account} = await createAdminClient()
+            session = await account.createEmailPasswordSession(
+                email,
+                password
+            )
 
-        const {account} = await createAdminClient()
-        const session = await account.createEmailPasswordSession(
-            email,
-            password
-        )
-
+        } catch (error) {
+            console.error("Login error:", error);
+            return { success: false, message: "Invalid credentials" };
+        }
+        
         cookies().set('session', session.secret , {
             httpOnly:true,
             sameSite:"strict",

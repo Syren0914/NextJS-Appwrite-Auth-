@@ -5,7 +5,7 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    // phone: "",
     password: ""
   });
   const [message, setMessage] = useState("");
@@ -18,7 +18,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/order", {
+      const res = await fetch("/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const SignUp = () => {
           />
         </div>
 
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700">Phone:</label>
           <input 
             type="text" 
@@ -82,7 +82,7 @@ const SignUp = () => {
             placeholder="Enter your phone number..." 
             className="mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
           />
-        </div>
+        </div> */}
 
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700">Password:</label>
