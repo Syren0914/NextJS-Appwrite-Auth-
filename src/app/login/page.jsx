@@ -1,8 +1,8 @@
 import React from "react";
-import { createAdminClient } from "@/appwrite/config";
+import { createAdminClient } from "../../appwrite/config";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import auth from "@/auth";
+import auth from "../../auth";
 
 export default async function Page() {
     const user = await auth.getUser();
@@ -44,6 +44,13 @@ export default async function Page() {
                         value="Login" 
                         className="w-full py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-white hover:text-black transition duration-200 cursor-pointer"
                     />
+                </div>
+                <div className="text-center">
+                    <p className="text-sm text-gray-600">Don't have an account?
+                    <a href="/signup" className="inline-block mt-2 py-2 px-4  text-black font-semibold rounded-md hover:text-gray-500 transition duration-200">
+                        Sign Up
+                    </a>
+                    </p>
                 </div>
             </form>
         </div>

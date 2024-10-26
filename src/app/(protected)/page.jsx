@@ -1,8 +1,8 @@
-import axiosInstance from "@/lib/axiosInstance";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { CalendarDays, DollarSign, Scissors, Users } from "lucide-react";
+import axiosInstance from "../../lib/axiosInstance"
+import { Button } from "../../components/ui/button"; // Adjust based on your directory structure
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
+import { CalendarDays, DollarSign, Scissors, PlusCircle, Users } from "lucide-react";
 
 export default async function Home() {
   const response = await axiosInstance({
@@ -13,7 +13,12 @@ export default async function Home() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Salon Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Salon Admin Dashboard</h1>
+        <Button>
+          <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
+        </Button>
+      </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
         <Card>
