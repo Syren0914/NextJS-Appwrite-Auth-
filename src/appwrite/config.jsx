@@ -26,11 +26,28 @@ const createSessionClient = async (session) => {
     };
 };
 
+const createUser = async ({ name, email, password, phone }) => {
+    const { account } = await createAdminClient();
+    
+    try {
+        const user = await account.create("unique()", email, password, name);
+
+        // Optionally add phone as a custom preference (if supported)
+        await account.updatePrefs({
+            phone
+        });
+
+        return user;
+    } catch (error) {
+        console.error("User creation failed:", error);
+        throw new Error("Failed to create user.");
+    }
+};
 
 
 
 
 
 
-export { createAdminClient,createSessionClient};
+export { createAdminClient,createSessionClient, createUser};
 

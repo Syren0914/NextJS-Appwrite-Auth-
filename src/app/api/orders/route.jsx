@@ -1,6 +1,7 @@
 import { createSessionClient, createAdminClient } from "@/appwrite/config";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { createUser } from "../../appwrite/config";
 
 export async function GET(request) {
     const sessionCookie = cookies().get("session");
@@ -24,3 +25,18 @@ export async function GET(request) {
     }
 }
 
+
+
+export async function POST(req, res) {
+  try {
+    const { name, email, password, phone } = await req.json();
+    
+    // Call the createUser function
+    const user = await createUser({ name, email, password, phone });
+    
+    return res.status(201).json({ message: "User created successfully", user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
