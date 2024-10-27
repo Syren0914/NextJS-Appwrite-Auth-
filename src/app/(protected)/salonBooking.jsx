@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react"; // Import useEffect for user authentication
+import { useState, useEffect } from "react"; 
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Scissors, Clock, Calendar as CalendarIcon } from "lucide-react";
-import { Client, Databases } from 'appwrite'; // Import Appwrite SDK
+import { handleBookingSubmit, createSessionClient } from "@/appwrite/config"; // Import your booking submit function
 
 // Enhanced mock data for services with descriptions
 const services = [
@@ -58,19 +58,16 @@ export default function SalonBooking() {
   const [selectedTime, setSelectedTime] = useState(undefined);
   const [userId, setUserId] = useState(null); // State for logged-in user ID
 
-  // Initialize Appwrite client
-  const client = new Client();
-  client.setEndpoint('YOUR_APPWRITE_ENDPOINT').setProject('YOUR_PROJECT_ID');
-  const databases = new Databases(client);
-
   // Fetch user ID (replace this with your actual authentication logic)
   useEffect(() => {
     const fetchUserId = async () => {
-      // Get user ID from Appwrite authentication context or state
-      // For example:
-      // const user = await account.get(); // Ensure you have the account instance available
-      // setUserId(user.$id);
-      // setUserId('your-user-id'); // Use your actual user ID here for testing
+      try {
+        const { account } = await createSessionClient(); // Create the session client
+        const user = await account.get(); // Fetch user details
+        setUserId(user.$id); // Set the user ID from Appwrite
+      } catch (error) {
+        console.error("Failed to fetch user ID:", error);
+      }
     };
 
     fetchUserId();
@@ -94,28 +91,11 @@ export default function SalonBooking() {
     return sum + (parseInt(service?.duration.split(' ')[0]) || 0);
   }, 0);
 
-  const handleBookingSubmit = async () => {
-    const bookingData = {
-      customerId: userId, // Include the logged-in user's ID
-      services: selectedServices,
-      date: selectedDate.toISOString().split('T')[0], // Store date as YYYY-MM-DD
-      time: selectedTime,
-      totalPrice,
-      totalDuration,
-    };
-
-    try {
-      await databases.createDocument('YOUR_DATABASE_ID', 'YOUR_BOOKINGS_COLLECTION_ID', 'unique()', bookingData);
-      alert('Booking successful!');
-      // Optionally, reset the form after successful booking
-      setSelectedServices([]);
-      setSelectedDate(undefined);
-      setSelectedTime(undefined);
-    } catch (error) {
-      console.error('Error creating booking:', error);
-      alert('Failed to create booking. Please try again.');
-    }
+  const submitBooking = async (event) => {
+    event.preventDefault();
+    await handleBookingSubmit({ selectedServices, selectedDate, selectedTime });
   };
+  
 
   return (
     <div className="container mx-auto p-4 max-w-6xl">
@@ -177,7 +157,7 @@ export default function SalonBooking() {
                         key={time}
                         variant={selectedTime === time ? "default" : "outline"}
                         onClick={() => setSelectedTime(time)}
-                        className={`w-full ${selectedTime === time ? "text-white" : "text-black"}`} // Change text color based on selection
+                        className={`w-full ${selectedTime === time ? "text-white" : "text-black"}`}
                       >
                         {time}
                       </Button>
@@ -197,7 +177,7 @@ export default function SalonBooking() {
             <p className="flex items-center"><Clock className="mr-2 h-4 w-4" /> Total Duration: {totalDuration} minutes</p>
             <p className="text-2xl font-bold mt-2">Total: ${totalPrice}</p>
           </div>
-          <Button className="mt-4 w-full text-lg py-6" onClick={handleBookingSubmit}>Book Your Experience</Button>
+          <Button className="mt-4 w-full text-lg py-6" onClick={submitBooking}>Book Your Experience</Button>
         </CardFooter>
       </Card>
     </div>

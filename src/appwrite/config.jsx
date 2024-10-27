@@ -39,17 +39,18 @@ const createUser = async ({ name, email, password }) => {
     }
 };
 
-const handleBookingSubmit = async ({ userId, selectedServices, selectedDate, selectedTime }) => {
+const handleBookingSubmit = async ({  selectedServices, selectedDate, selectedTime }) => {
     const { databases } = await createAdminClient(); // Use createSessionClient if you need user session context
     const bookingData = {
-        customerId: userId,
         services: selectedServices,
-        date: selectedDate.toISOString().split('T')[0], // Store date as YYYY-MM-DD
+        date: selectedDate ? selectedDate.toISOString() : null, // Convert to ISO only if defined
         time: selectedTime,
-    };
+      };
 
     try {
-        await databases.createDocument('YOUR_DATABASE_ID', 'YOUR_BOOKINGS_COLLECTION_ID', 'unique()', bookingData);
+        await databases.createDocument(process.env.NEXT_PUBLIC_DATABASE_ID, 
+                                        process.env.NEXT_PUBLIC_COLLECTION_ORDERS,
+                                            'unique()', bookingData);
         alert('Booking successful!');
     } catch (error) {
         console.error('Error creating booking:', error);
