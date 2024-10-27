@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Scissors, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { handleBookingSubmit, createSessionClient } from "@/appwrite/config"; // Import your booking submit function
 
+
 // Enhanced mock data for services with descriptions
 const services = [
   { 
@@ -62,9 +63,8 @@ export default function SalonBooking() {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const { account } = await createSessionClient(); // Create the session client
-        const user = await account.get(); // Fetch user details
-        setUserId(user.$id); // Set the user ID from Appwrite
+        
+         // Set the user ID from Appwrite
       } catch (error) {
         console.error("Failed to fetch user ID:", error);
       }

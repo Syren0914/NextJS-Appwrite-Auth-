@@ -1,5 +1,6 @@
 import { Client, Databases, Account } from "node-appwrite";
 
+// Function to create the admin client
 const createAdminClient = async () => {
     const client = new Client()
         .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT)
@@ -12,6 +13,7 @@ const createAdminClient = async () => {
     };
 };
 
+// Function to create a client with session-based authentication
 const createSessionClient = async (session) => {
     const client = new Client()
         .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT)
@@ -27,6 +29,7 @@ const createSessionClient = async (session) => {
     };
 };
 
+// Function to create a new user
 const createUser = async ({ name, email, password }) => {
     const { account } = await createAdminClient();
     
@@ -39,18 +42,25 @@ const createUser = async ({ name, email, password }) => {
     }
 };
 
-const handleBookingSubmit = async ({  selectedServices, selectedDate, selectedTime }) => {
-    const { databases } = await createAdminClient(); // Use createSessionClient if you need user session context
+// Function to handle booking submission to the Appwrite database
+const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTime, userId }) => {
+    const { databases } = await createAdminClient(); // Use createSessionClient if needed
+
     const bookingData = {
+        userId, // Store userId in booking data
         services: selectedServices,
         date: selectedDate ? selectedDate.toISOString() : null, // Convert to ISO only if defined
         time: selectedTime,
-      };
+        createdAt: new Date().toISOString(),
+    };
 
     try {
-        await databases.createDocument(process.env.NEXT_PUBLIC_DATABASE_ID, 
-                                        process.env.NEXT_PUBLIC_COLLECTION_ORDERS,
-                                            'unique()', bookingData);
+        await databases.createDocument(
+            process.env.NEXT_PUBLIC_DATABASE_ID, 
+            process.env.NEXT_PUBLIC_COLLECTION_BOOKINGS, // Ensure this matches the collection for bookings
+            'unique()', 
+            bookingData
+        );
         alert('Booking successful!');
     } catch (error) {
         console.error('Error creating booking:', error);
