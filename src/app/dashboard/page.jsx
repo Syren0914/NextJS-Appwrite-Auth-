@@ -15,10 +15,14 @@ export default async function Home() {
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Salon Admin Dashboard</h1>
+
         <Button>
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
         </Button>
+        
+       
       </div>
+      
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
         <Card>
