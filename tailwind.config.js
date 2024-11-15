@@ -10,6 +10,7 @@ module.exports = {
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
+			box: '#C7AD7F;',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
