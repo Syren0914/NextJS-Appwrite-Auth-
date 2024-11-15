@@ -18,7 +18,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/orders", {
+      const res = await fetch("/api/reservation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
