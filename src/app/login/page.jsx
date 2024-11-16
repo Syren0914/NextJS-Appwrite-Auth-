@@ -1,17 +1,15 @@
-import React from 'react'
-import { createAdminClient } from "../../appwrite/config";
-import { cookies } from "next/headers";
+import React from 'react';
 import { redirect } from "next/navigation";
 import auth from "../../auth";
-import { Leaf, Lock } from 'lucide-react'
-import Image from 'next/image'
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Leaf, Lock } from 'lucide-react';
+import Image from 'next/image';
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 
 
-const newstyle = async () => {
+export default async function Page({params}) {
     const user = await auth.getUser();
 
     if (user) {
@@ -97,7 +95,7 @@ const newstyle = async () => {
       {/* Right column with image */}
       <div className="hidden lg:block w-full lg:w-1/2 relative">
         <Image
-          src="/favicon.ico"
+          src="/organic.jpg"
           alt="Skincare products and treatments"
           layout="fill"
           objectFit="cover"
@@ -109,5 +107,3 @@ const newstyle = async () => {
     </div>
   )
 }
-
-export default newstyle

@@ -19,6 +19,7 @@ export default async function Page({params}) {
 
     return (
         <div className="flex items-center justify-center min-h-screen ">
+            
             <form id="login-form" action={auth.createSession} className="bg-black p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h3 className="text-2xl font-semibold text-center text-gray-800 mb-4">Login</h3>
                 <p className="text-sm text-center text-gray-600 mb-8">Enter Your Information to Login</p>
@@ -46,6 +47,7 @@ export default async function Page({params}) {
                     />
                 </div>
                 <div>
+                    
                     <input 
                         type="submit" 
                         value="Login" 
@@ -59,6 +61,7 @@ export default async function Page({params}) {
                     </a>
                     </p>
                 </div>
+                
             </form>
         </div>
     );
