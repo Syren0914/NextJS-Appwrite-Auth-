@@ -97,7 +97,7 @@ const newstyle = async () => {
       {/* Right column with image */}
       <div className="hidden lg:block w-full lg:w-1/2 relative">
         <Image
-          src="/organic.jpg"
+          src="/favicon.ico"
           alt="Skincare products and treatments"
           layout="fill"
           objectFit="cover"
