@@ -8,6 +8,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Scissors, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { handleBookingSubmit, createSessionClient } from "@/appwrite/config"; // Import your booking submit function
+import { Playfair_Display } from "next/font/google";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["italic"], // Add this line to include italic style
+});
 
 
 // Enhanced mock data for services with descriptions
@@ -99,21 +106,21 @@ export default function SalonBooking() {
 
   return (
     <div className="container mx-auto p-4 max-w-6xl">
-      <Card>
+      <Card className>
         <CardHeader>
-          <CardTitle className="text-3xl font-bold">Book Your Salon Experience</CardTitle>
+          <CardTitle className = {`${playfairDisplay.className} text-3xl font-medium`}>Book Your Salon Experience</CardTitle>
           <CardDescription>Choose from our range of luxurious services</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-6 md:grid-cols-12">
             <div className="md:col-span-7">
-              <h3 className="text-2xl font-semibold mb-4">Our Services</h3>
+              <h3 className = {`${playfairDisplay.className} text-2xl font-semibold mb-4`}>Our Services</h3>
               <ScrollArea className="h-[500px] rounded-md border p-4">
                 {services.map(service => (
                   <Card key={service.id} className="mb-4">
                     <CardHeader className="pb-2">
                       <div className="flex items-center justify-between">
-                        <CardTitle className="text-lg">{service.name}</CardTitle>
+                        <CardTitle className={`${playfairDisplay.className} text-lg`}>{service.name}</CardTitle>
                         <div className="text-sm font-medium">${service.price}</div>
                       </div>
                       <CardDescription>{service.duration}</CardDescription>
@@ -139,7 +146,7 @@ export default function SalonBooking() {
               </ScrollArea>
             </div>
             <div className="md:col-span-5">
-              <h3 className="text-2xl font-semibold mb-4">Select Date</h3>
+              <h3 className={`${playfairDisplay.className} text-2xl font-semibold mb-4`}>Select Date</h3>
               <div className="p-4 border rounded-md ">
                 <Calendar
                   mode="single"
@@ -170,14 +177,14 @@ export default function SalonBooking() {
         </CardContent>
         <CardFooter className="flex flex-col items-start">
           <div className="flex flex-col space-y-2 text-left w-full">
-            <h3 className="text-2xl font-semibold">Booking Summary</h3>
+            <h3 className={`${playfairDisplay.className} text-2xl font-semibold`}>Booking Summary</h3>
             <p className="flex items-center"><Scissors className="mr-2 h-4 w-4" /> Services: {selectedServices.length} selected</p>
             {selectedDate && <p className="flex items-center"><CalendarIcon className="mr-2 h-4 w-4" /> Date: {selectedDate.toDateString()}</p>}
             {selectedTime && <p className="flex items-center"><Clock className="mr-2 h-4 w-4" /> Time: {selectedTime}</p>}
             <p className="flex items-center"><Clock className="mr-2 h-4 w-4" /> Total Duration: {totalDuration} minutes</p>
-            <p className="text-2xl font-bold mt-2">Total: ${totalPrice}</p>
+            <p className={`${playfairDisplay.className} text-2xl font-medium mt-2`}>Total: ${totalPrice}</p>
           </div>
-          <Button className="mt-4 w-full text-lg py-6" onClick={submitBooking}>Book Your Experience</Button>
+          <Button className={`${playfairDisplay.className} mt-4 w-full text-lg py-6`} onClick={submitBooking}>Book Your Experience</Button>
         </CardFooter>
       </Card>
     </div>

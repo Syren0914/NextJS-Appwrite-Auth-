@@ -1,5 +1,6 @@
 import React from 'react';
 import { redirect } from "next/navigation";
+import { Playfair_Display } from "next/font/google";
 import auth from "../../auth";
 import { Leaf, Lock } from 'lucide-react';
 import Image from 'next/image';
@@ -7,9 +8,16 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["italic"], // Add this line to include italic style
+});
 
 
 export default async function Page({params}) {
+    
+  
     const user = await auth.getUser();
 
     if (user) {
@@ -24,12 +32,12 @@ export default async function Page({params}) {
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <Leaf className="mx-auto h-12 w-12 text-[#C7AD7F]" />
-            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Glow Organic Skincare</h2>
+            <h2 className={`${playfairDisplay.className} mt-6 text-3xl font-medium text-yellow-950`} >Glow Organic Skincare</h2>
             <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
           </div>
           <form className="mt-8 space-y-6" action={auth.createSession}>
             <div className="rounded-md shadow-sm -space-y-px">
-              <div>
+              <div className='mb-5'>
                 <Label htmlFor="email-address" className="sr-only">Email address</Label>
                 <Input
                   id="email-address"
