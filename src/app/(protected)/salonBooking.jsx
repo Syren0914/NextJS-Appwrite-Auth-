@@ -10,6 +10,7 @@ import { Scissors, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { handleBookingSubmit, createSessionClient } from "@/appwrite/config"; // Import your booking submit function
 import { Playfair_Display } from "next/font/google";
 
+
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -70,6 +71,13 @@ export default function SalonBooking() {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
+        const response = await fetch("user")
+        if(response.ok){
+          const {user} = await response.json
+          setUserId(user.$id)
+        }else{
+          console.warn("Failed to fetch user")
+        }  
         
          // Set the user ID from Appwrite
       } catch (error) {
@@ -100,7 +108,11 @@ export default function SalonBooking() {
 
   const submitBooking = async (event) => {
     event.preventDefault();
-    await handleBookingSubmit({ selectedServices, selectedDate, selectedTime });
+    if(!userId){
+      alert("Please login in before booking")
+      return;
+    }
+    await handleBookingSubmit({ selectedServices, selectedDate, selectedTime,userId });
   };
   
 

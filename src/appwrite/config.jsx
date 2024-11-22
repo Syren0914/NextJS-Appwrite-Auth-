@@ -1,4 +1,13 @@
 import { Client, Databases, Account } from "node-appwrite";
+import db from "./database";
+
+const client = new Client();
+
+client
+    .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT)
+    .setProject(process.env.NEXT_PUBLIC_PROJECT_ID);
+
+const databases = new Databases(client);
 
 // Function to create the admin client
 const createAdminClient = async () => {
@@ -44,10 +53,10 @@ const createUser = async ({ name, email, password }) => {
 
 // Function to handle booking submission to the Appwrite database
 const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTime, userId }) => {
-    const { databases } = await createAdminClient(); // Use createSessionClient if needed
+    const { databases } = await createAdminClient();
 
     const bookingData = {
-        userId, // Store userId in booking data
+        customerId: userId, // Store userId in booking data
         services: selectedServices,
         date: selectedDate ? selectedDate.toISOString() : null, // Convert to ISO only if defined
         time: selectedTime,
@@ -55,12 +64,14 @@ const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTim
     };
 
     try {
-        await databases.createDocument(
-            process.env.NEXT_PUBLIC_DATABASE_ID, 
-            process.env.NEXT_PUBLIC_COLLECTION_BOOKINGS, // Ensure this matches the collection for bookings
-            'unique()', 
+        console.log(bookingData)
+        const response = await databases.createDocument(
+            process.env.NEXT_PUBLIC_DATABASE_ID, // Replace with your Appwrite database ID
+            process.env.NEXT_PUBLIC_COLLECTION_ORDERS, // Replace with your Appwrite collection ID
+            'unique()', // Use 'unique()' to auto-generate a document ID
             bookingData
         );
+
         alert('Booking successful!');
     } catch (error) {
         console.error('Error creating booking:', error);
@@ -68,4 +79,4 @@ const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTim
     }
 };
 
-export { createAdminClient, createSessionClient, createUser, handleBookingSubmit };
+export { createAdminClient, createSessionClient, createUser, handleBookingSubmit , databases };
