@@ -1,4 +1,5 @@
 "use client"
+import { redirect } from "next/dist/server/api-utils";
 import { useState } from "react";
 
 const SignUp = () => {
@@ -18,7 +19,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/reservation", {
+      const res = await fetch("/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +30,7 @@ const SignUp = () => {
       const data = await res.json();
       if (res.ok) {
         setMessage("User created successfully!");
+        
       } else {
         setMessage(data.error || "Failed to create user.");
       }

@@ -6,10 +6,10 @@ import { CalendarDays, DollarSign, Scissors, PlusCircle, Users } from "lucide-re
 
 export default async function Home() {
   const response = await axiosInstance({
-    url: "http://localhost:3000/api/reservation",
-    method: "get"
+    url: 'http://localhost:3000/api/orders',
+    method: 'get',
   });
-  const { reservation } = response.data;
+  const { orders } = response.data;
 
   return (
     <div className="p-8">
@@ -75,23 +75,24 @@ export default async function Home() {
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
                 <TableHead>Services</TableHead>
-                <TableHead>Time </TableHead>
-                <TableHead>Date</TableHead>
+                <TableHead>Total</TableHead>
+                <TableHead>Time & Date </TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {reservation.map((reserv) => (
-                <TableRow key={reserv.$id}>
-                  <TableCell>{reserv.customer}</TableCell>
-                  <TableCell>{reserv.customer_email}</TableCell>
-                  <TableCell>{reserv.phone}</TableCell>
-                  <TableCell>{reserv.services}</TableCell>
-                  <TableCell>{reserv.time}</TableCell>
+              {orders.map((order) => (
+                <TableRow key={order.$id}>
+                  <TableCell>{order.customer}</TableCell>
+                  <TableCell>{order.customer_email}</TableCell>
+                  <TableCell>{order.phone}</TableCell>
+                  <TableCell>{order.services}</TableCell>
+                  <TableCell>{order.total}</TableCell>
+                  <TableCell>{order.$createdAt}</TableCell>
                   
-                  <TableCell>{reserv.date}</TableCell>
+                  
                   <TableCell>
-                    <Button variant="outline" size="sm">View</Button>
+                    <Button variant="outline" size="sm" className= "text-black" >View</Button>
                   </TableCell>
                 </TableRow>
               ))}

@@ -93,7 +93,7 @@ export default async function Page({params}) {
           </form>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{' '}
-            <a href="#" className="font-medium text-[#C7AD7F] hover:text-[#B69E6B]">
+            <a href="/signup" className="font-medium text-[#C7AD7F] hover:text-[#B69E6B]">
               Don't have an Account ? Sign Up
             </a>
           </p>

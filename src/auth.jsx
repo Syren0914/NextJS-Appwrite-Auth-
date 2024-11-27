@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { createSessionClient } from "./appwrite/config";
 import { createAdminClient } from "./appwrite/config";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 const auth = {
     user: null,
@@ -24,6 +25,7 @@ const auth = {
             const { account } = await createSessionClient(auth.sessionCookie.value);
             auth.user = await account.get();
             
+            
         } catch (error) {
             console.error(error);
             auth.user = null;
@@ -41,6 +43,7 @@ const auth = {
             const { account } = await createAdminClient();
             session = await account.createEmailPasswordSession(email, password);
         } catch (error) {
+            
             console.error("Login error:", error);
             return { success: false, message: "Invalid credentials" };
         }
