@@ -1,8 +1,11 @@
 import React from 'react'
+import Thankyou from './booking-confirmation'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <Thankyou/>
+    </div>
   )
 }
 

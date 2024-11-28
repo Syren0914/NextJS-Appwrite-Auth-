@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Scissors, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { handleBookingSubmit, createSessionClient } from "@/appwrite/config"; // Import your booking submit function
 import { Playfair_Display } from "next/font/google";
+import { useRouter } from "next/navigation"; // Correct import for App Router
+
 
 
 
@@ -67,6 +69,7 @@ const availableTimes = [
 ];
 
 export default function SalonBooking() {
+  const router = useRouter(); 
   const [services, setServices] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedDate, setSelectedDate] = useState(undefined);
@@ -75,6 +78,8 @@ export default function SalonBooking() {
   const [userId, setUserId] = useState(null); // State for logged-in user ID
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [userPhone, setUserPhone] = useState(null);
+
 
   // Fetch user ID (replace this with your actual authentication logic)
   useEffect(() => {
@@ -94,6 +99,7 @@ export default function SalonBooking() {
           setUserId(user.$id);  // Set the user ID
           setUserEmail(user.email);  // Set the user email
           setUserName(user.name);    // Set the user name
+          setUserPhone(user.phone)
         } else {
           console.error("Failed to fetch user data.");
         }
@@ -168,10 +174,12 @@ export default function SalonBooking() {
         selectedTime,
         userId,
         userName,
-        userEmail
+        userEmail,
+        userPhone
       });
-      console.log({ selectedServices, selectedDate, selectedTime, userId, userName, userEmail });
+      console.log({ selectedServices, selectedDate, selectedTime, userId, userName, userEmail,userPhone });
       alert("Booking successful!");
+      router.push("/thankyou");
     } catch (error) {
       console.error("Booking submission failed:", error);
       alert("Failed to submit booking. Please try again.");
@@ -267,6 +275,8 @@ export default function SalonBooking() {
       </Card>
       <h2>Welcome, {userName || "Guest"}!</h2> {/* Display user name or "Guest" if not available */}
       <p>Email: {userEmail || "Not logged in"}</p> {/* Display user email or "Not logged in" */}
+      <p>Phone: {userPhone || "Not logged in"}</p> {/* Display user email or "Not logged in" */}
+
     </div>
   );
 }

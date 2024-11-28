@@ -3,7 +3,7 @@ import { CalendarDays, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-function Component({ 
+function Thankyou({ 
   date = "Friday, November 3", 
   time = "2:00 PM", 
   phoneNumber = "(555) 123-4567" 
@@ -45,4 +45,4 @@ function Component({
   );
 }
 
-export default Component;
+export default Thankyou;

@@ -50,7 +50,7 @@ const createUser = async ({ name, email, password }) => {
         throw new Error("Failed to create user.");
     }
 };
-const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTime, userId, userName, userEmail }) => {
+const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTime, userId, userName, userEmail,userPhone }) => {
     try {
       // Initialize client and databases
       const { databases } = await createSessionClient(); // Get session client (for user-related actions)
@@ -59,6 +59,7 @@ const handleBookingSubmit = async ({ selectedServices, selectedDate, selectedTim
       const bookingData = {
         userId,
         userName,
+        userPhone,
         userEmail,
         selectedServices,
         selectedDate: selectedDate.toISOString(), // Convert to ISO string format for consistency
