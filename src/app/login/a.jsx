@@ -55,7 +55,7 @@ export default async function Page({params}) {
                     />
                 </div>
                 <div className="text-center">
-                    <p className="text-sm text-gray-600">Don't have an account?
+                    <p className="text-sm text-gray-600">Don&apos;t have an account?
                     <a href="/signup" className="inline-block mt-2 py-2 px-4  text-black font-semibold rounded-md hover:text-gray-500 transition duration-200">
                         Sign Up
                     </a>
