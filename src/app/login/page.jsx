@@ -26,12 +26,12 @@ export default async function Page({params}) {
     
   return (
     <div>
-        <div className="min-h-screen bg-white flex flex-col lg:flex-row">
+        <div className="min-h-screen bg-[#ece3d4] flex flex-col lg:flex-row">
       {/* Left column with login form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
-            <Leaf className="mx-auto h-12 w-12 text-[#C7AD7F]" />
+            <Leaf className="mx-auto h-12 w-12 text-[#c7ad7f]" />
             <h2 className={`${playfairDisplay.className} mt-6 text-3xl font-medium text-yellow-950`} >Glow Organic Skincare</h2>
             <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
           </div>
@@ -45,7 +45,7 @@ export default async function Page({params}) {
                   type="email"
                   autoComplete="email"
                   required
-                  className="rounded-t-md"
+                  className="rounded-t-md bg-[#f7f4ee]"
                   placeholder="Email address"
                   defaultValue={"erdenebatbayar3@gmail.com"} 
                   
@@ -60,7 +60,7 @@ export default async function Page({params}) {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="rounded-b-md"
+                  className="rounded-b-md bg-[#f7f4ee]"
                   placeholder="Password"
                   defaultValue={"12345678"} 
                   

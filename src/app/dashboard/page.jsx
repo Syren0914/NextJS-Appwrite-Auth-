@@ -3,7 +3,15 @@ import { Button } from "../../components/ui/button"; // Adjust based on your dir
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { CalendarDays, DollarSign, Scissors, PlusCircle, Users } from "lucide-react";
+import Link from "next/link";
+import { Playfair_Display } from "next/font/google";
 
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["italic"], // Add this line to include italic style
+});
 export default async function Home() {
   const response = await axiosInstance({
     url: 'http://localhost:3000/api/orders',
@@ -17,15 +25,25 @@ export default async function Home() {
 
   return (
     <div className="p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Salon Admin Dashboard</h1>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
+        <h1 className={`${playfairDisplay.className} text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-0`}>
+          Salon Admin Dashboard
+        </h1>
 
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
-        </Button>
-        
-       
+        <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+          <Button className="w-full sm:w-auto px-4 py-2">
+            <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
+          </Button>
+          <Button className="w-full sm:w-auto px-4 py-2">
+            <Link href="/" className="flex items-center justify-center w-full h-full">
+              Booking
+            </Link>
+          </Button>
+
+        </div>
       </div>
+
+      
       
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
