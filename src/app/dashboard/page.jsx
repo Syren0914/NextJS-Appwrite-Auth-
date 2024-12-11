@@ -3,6 +3,7 @@ import { Button } from "../../components/ui/button"; // Adjust based on your dir
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { CalendarDays, DollarSign, Scissors, PlusCircle, Users } from "lucide-react";
+import Link from "next/link";
 
 export default async function Home() {
   const response = await axiosInstance({
@@ -18,11 +19,19 @@ export default async function Home() {
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Salon Admin Dashboard</h1>
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <div className="flex flex-col space-y-3">
+  <Link href={"/"}>
+    <Button className="w-full">
+      <PlusCircle className="mr-2 h-4 w-4" /> Make A Booking
+    </Button>
+  </Link>
+  <Button className="w-full">
+    <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
+  </Button>
+</div>
 
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" /> Add New Service
-        </Button>
+        
         
        
       </div>
