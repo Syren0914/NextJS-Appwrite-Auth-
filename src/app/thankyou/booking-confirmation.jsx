@@ -13,7 +13,7 @@ function Thankyou({
       <Card className="w-full max-w-md border-2 border-black">
         <CardHeader className="text-center border-b border-gray-200">
           <CardTitle className="text-2xl font-bold text-black">Thank You for Booking!</CardTitle>
-          <CardDescription className="text-gray-600">We&apos;re excited to see you soon</CardDescription>
+          <CardDescription className="text-gray-600">We're excited to see you soon</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6 pt-6">
           <div className="flex items-center justify-center space-x-2 text-lg font-medium text-black">
@@ -28,7 +28,7 @@ function Thankyou({
             <h3 className="font-semibold text-black mb-2">Appointment Details:</h3>
             <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
               <li>Please arrive 5-10 minutes early</li>
-              <li>Bring any reference photos you&apos;d like to show your stylist</li>
+              <li>Bring any reference photos you'd like to show your stylist</li>
               <li>Feel free to call us if you need to reschedule</li>
             </ul>
             <div className="mt-3 flex items-center text-black">
